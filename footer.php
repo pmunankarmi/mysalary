@@ -19,7 +19,7 @@ $default_socials = [
 $socials       = mysalary_field( 'socials', 'option', $default_socials );
 $app_store_url = mysalary_field( 'app_store_url', 'option', 'https://apps.apple.com/app/id6785230853' );
 $play_store_url = mysalary_field( 'play_store_url', 'option', 'https://play.google.com/store/apps/details?id=io.invento.mysalary' );
-$certificate_url = mysalary_field( 'shariah_certificate_url', 'option', '#' );
+$certificate_setting = mysalary_field( 'shariah_certificate_url', 'option', '' );
 $footer_home_url = function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
 
 $footer_page_url = static function ( $slug ) {
@@ -32,6 +32,10 @@ $footer_page_url = static function ( $slug ) {
 	}
 	return $page ? get_permalink( $page ) : home_url( '/' . trim( $slug, '/' ) . '/' );
 };
+
+$certificate_setting  = '#' === trim( (string) $certificate_setting ) ? '' : $certificate_setting;
+$certificate_url      = $certificate_setting ?: $footer_page_url( 'sharia-compliance' );
+$certificate_external = (bool) $certificate_setting;
 ?>
 
 </main><!-- #main -->
@@ -87,7 +91,7 @@ $footer_page_url = static function ( $slug ) {
 						<li><a href="<?php echo esc_url( $footer_page_url( 'privacy-policy' ) ); ?>"><?php echo esc_html( mysalary_form_string( 'footer_privacy', 'Privacy Policy', 'سياسة الخصوصية' ) ); ?></a></li>
 						<li><a href="<?php echo esc_url( $footer_page_url( 'terms-of-service' ) ); ?>"><?php echo esc_html( mysalary_form_string( 'footer_terms', 'Terms of Service', 'شروط الاستخدام' ) ); ?></a></li>
 						<li><a href="<?php echo esc_url( $footer_page_url( 'security' ) ); ?>"><?php echo esc_html( mysalary_form_string( 'footer_security', 'Security', 'الأمان' ) ); ?></a></li>
-						<li><a href="<?php echo esc_url( $certificate_url ); ?>"<?php echo '#' !== $certificate_url ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( mysalary_form_string( 'footer_shariah', 'Shariah-compliant', 'متوافق مع الشريعة' ) ); ?></a></li>
+						<li><a href="<?php echo esc_url( $certificate_url ); ?>"<?php echo $certificate_external ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( mysalary_form_string( 'footer_shariah', 'Shariah-compliant', 'متوافق مع الشريعة' ) ); ?></a></li>
 					</ul>
 				<?php endif; ?>
 			</div>

@@ -15,7 +15,8 @@ mysalary/
 │   ├── template-about.php
 │   ├── template-careers.php
 │   ├── template-contact.php
-│   └── template-demo.php              ← Request a Demo
+│   ├── template-demo.php              ← Request a Demo
+│   └── template-sharia-compliance.php ← Sharia Compliance
 ├── template-parts/
 │   └── front/
 │       ├── hero.php
@@ -35,9 +36,12 @@ mysalary/
 │   └── template-tags.php              ← helpers + inline SVG icon library
 ├── assets/
 │   ├── css/main.css                   ← original stylesheet + demo-page CSS + theme additions
+│   ├── css/sharia-compliance.css      ← Sharia page design
 │   ├── js/main.js                     ← hero rotation, reveals, header behaviour
 │   ├── js/forms.js                    ← AJAX behaviour for all three forms
-│   └── images/                        ← logos and app-store badges
+│   ├── js/sharia-compliance.js        ← certificate viewer and UID copy control
+│   ├── documents/                     ← bundled five-page certificate PDF
+│   └── images/                        ← logos, badges, and certificate pages
 └── languages/                         ← drop .po/.mo files here
 ```
 
@@ -115,6 +119,16 @@ WP admin → **Languages → String Translations** → filter by group "MySalary
 
 **Appearance → Menus** — create one menu and assign it to "Primary Navigation" for English; create a separate menu and assign it to "Primary Navigation" for Arabic. Same for the footer menu.
 
+### 10. Set up the Sharia Compliance page
+
+1. **Pages → Add New** → title: *Sharia Compliance*.
+2. In the page-attribute sidebar, set **Template: Sharia Compliance** and publish.
+3. Edit the page again. The **Sharia Compliance Page — Content** panel appears below the title with tabs for Hero & Certification, Governance, Sharia Committee, Certificate, and Verification & Viewer.
+4. Every visible word is an individual ACF text/textarea field or a sub-field in a purpose-built repeater. No HTML block is used. The bundled content, logo, certificate preview pages, and PDF are used until you provide replacements.
+5. Add the Arabic translation from the Polylang language panel, select the same template, and enter the Arabic ACF values on that translated page.
+
+When no custom Legal menu is assigned, the footer's **Shariah-compliant** link automatically opens this page in the active language. A URL entered under **Site Settings → Shariah certificate URL** continues to override that footer destination.
+
 ## Editing content
 
 | To edit… | Go to… |
@@ -123,6 +137,7 @@ WP admin → **Languages → String Translations** → filter by group "MySalary
 | Header navigation fallbacks, footer copy, CTA labels, form labels | Languages → String Translations |
 | Logo | Appearance → Customize → Site Identity → Logo |
 | Form recipient email, app/play store URLs, Shariah certificate, social links | Site Settings (admin sidebar) |
+| Sharia page copy, cards, committee, PDF, images, and viewer labels | Pages → Sharia Compliance → Edit (and its Arabic translation) |
 | Demo, Contact, and Career submissions | Form Submissions (admin sidebar) |
 
 ## Customising the design

@@ -1,0 +1,508 @@
+    /* ===========================================================
+       SHARIA COMPLIANCE PAGE TEMPLATE
+       Loaded after style.css, on this page only. Reuses the
+       site's --ms-* tokens. All classes prefixed .sc-*
+       =========================================================== */
+    .sc-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    html.sc-lock { overflow: hidden; }
+
+    .sc-eyebrow {
+      display: inline-block;
+      padding: 7px 15px;
+      margin-bottom: 22px;
+      border-radius: var(--ms-radius-pill);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: var(--ms-cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- Hero ---------- */
+    .sc-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 84px;
+      background:
+        radial-gradient(ellipse 70% 80% at 88% 8%, rgba(23,202,242,0.28), transparent 62%),
+        linear-gradient(155deg, var(--ms-purple) 0%, var(--ms-purple-900) 100%);
+      color: var(--ms-white);
+    }
+    .sc-hero__inner {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) auto;
+      align-items: center;
+      gap: 56px;
+    }
+    .sc-hero h1 {
+      font-size: clamp(34px, 4.8vw, 56px);
+      line-height: 1.06;
+      color: var(--ms-white);
+      margin-bottom: 20px;
+    }
+    .sc-hero__lead {
+      max-width: 600px;
+      font-size: 17.5px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.82);
+      margin: 0 0 34px;
+    }
+    .sc-hero__actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px 28px;
+    }
+    .sc-hero__link {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ms-white);
+      border-bottom: 1px solid rgba(255,255,255,0.45);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .sc-hero__link:hover { color: var(--ms-cyan); border-bottom-color: var(--ms-cyan); }
+
+    /* SRB lockup: the logo keeps its own crimson, so it sits on white */
+    .sc-seal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 260px;
+      padding: 26px 26px 22px;
+      border-radius: var(--ms-radius-xl);
+      background: var(--ms-white);
+      box-shadow: var(--ms-shadow-xl);
+      text-align: center;
+    }
+    .sc-seal__label,
+    .sc-seal__uid span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ms-ink-soft);
+    }
+    .sc-seal__logo { height: auto; margin: 14px 0 18px; }
+    .sc-seal__uid {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+      padding-top: 16px;
+      border-top: 1px solid var(--ms-line);
+    }
+    .sc-seal__uid strong {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--ms-purple-900);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* style.css gives every svg max-width:100%, which lets icons in tight pills shrink to nothing */
+    .sc-hero .ms-btn svg,
+    .sc-cert__actions .ms-btn svg,
+    .sc-cert__zoom svg,
+    .sc-verify__btn svg,
+    .sc-copy svg,
+    .sc-viewer__tool svg,
+    .sc-viewer__close svg { flex-shrink: 0; max-width: none; }
+
+    /* ---------- Section shell ---------- */
+    .sc-section { padding: 96px 0; background: var(--ms-white); scroll-margin-top: 80px; }
+    .sc-section--alt { background: var(--ms-cream); }
+    .sc-head { max-width: 720px; margin-bottom: 44px; }
+    .sc-kicker {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ms-highlight);
+    }
+    .sc-head h2 {
+      font-size: clamp(28px, 3.2vw, 40px);
+      color: var(--ms-purple-900);
+      margin: 0 0 14px;
+    }
+    .sc-head p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ms-ink-soft);
+      margin: 0;
+    }
+
+    /* ---------- Governance points ---------- */
+    .sc-points {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0,1fr));
+      gap: 20px;
+    }
+    .sc-point {
+      grid-column: span 2;
+      padding: 28px 26px 30px;
+      border-radius: var(--ms-radius-lg);
+      background: var(--ms-white);
+      border: 1px solid var(--ms-line);
+      transition: box-shadow 0.25s var(--ms-ease), transform 0.25s var(--ms-ease), border-color 0.25s;
+    }
+    .sc-point:nth-child(n+4) { grid-column: span 3; }
+    .sc-point:hover {
+      transform: translateY(-3px);
+      border-color: var(--ms-purple-100);
+      box-shadow: var(--ms-shadow-md);
+    }
+    .sc-point__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      background: var(--ms-purple-50);
+      color: var(--ms-purple);
+    }
+    .sc-point__icon svg { width: 28px; height: 28px; }
+    .sc-point h3 {
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--ms-purple-900);
+      margin: 0 0 8px;
+    }
+    .sc-point p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ms-ink-soft);
+      margin: 0;
+    }
+
+    /* ---------- Sharia Advisor ---------- */
+    .sc-advisor {
+      display: grid;
+      grid-template-columns: 340px minmax(0,1fr);
+      border-radius: var(--ms-radius-xl);
+      background: var(--ms-white);
+      border: 1px solid var(--ms-line);
+      box-shadow: var(--ms-shadow-md);
+      overflow: hidden;
+    }
+    .sc-advisor + .sc-advisor { margin-top: 24px; }
+    .sc-advisor__id {
+      padding: 38px 34px 36px;
+      background:
+        radial-gradient(ellipse 90% 60% at 100% 0%, rgba(23,202,242,0.22), transparent 60%),
+        linear-gradient(160deg, var(--ms-purple) 0%, var(--ms-purple-900) 100%);
+      color: var(--ms-white);
+    }
+    .sc-advisor__mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      color: var(--ms-cyan);
+    }
+    .sc-advisor__mark svg { width: 30px; height: 30px; }
+    .sc-advisor__id h3 {
+      font-size: 22px;
+      line-height: 1.25;
+      color: var(--ms-white);
+      margin: 0 0 8px;
+    }
+    .sc-advisor__role {
+      display: inline-block;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ms-cyan);
+    }
+    .sc-advisor__bio { padding: 38px 42px 40px; align-self: center; }
+    .sc-advisor__bio p {
+      font-size: 16px;
+      line-height: 1.78;
+      color: var(--ms-ink-soft);
+      margin: 0 0 18px;
+    }
+    .sc-advisor__bio p:last-child { margin-bottom: 0; }
+
+    /* ---------- Certificate ---------- */
+    .sc-cert {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 48px;
+      padding: 36px;
+      border-radius: var(--ms-radius-xl);
+      background: var(--ms-cream);
+      border: 1px solid var(--ms-line);
+    }
+    .sc-cert__preview {
+      position: relative;
+      display: block;
+      border-radius: var(--ms-radius-md);
+      overflow: hidden;
+      background: var(--ms-white);
+      box-shadow: var(--ms-shadow-lg);
+      outline: 1px solid var(--ms-line);
+    }
+    .sc-cert__preview:focus-visible { outline: 2px solid var(--ms-purple); outline-offset: 3px; }
+    .sc-cert__preview img { width: 100%; height: auto; transition: transform 0.5s var(--ms-ease); }
+    .sc-cert__preview:hover img { transform: scale(1.02); }
+    .sc-cert__zoom {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: var(--ms-radius-pill);
+      background: var(--ms-purple-900);
+      color: var(--ms-white);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: var(--ms-shadow-md);
+      transition: background 0.2s;
+    }
+    .sc-cert__preview:hover .sc-cert__zoom { background: var(--ms-purple); }
+    .sc-cert__title {
+      font-size: 20px;
+      color: var(--ms-purple-900);
+      margin: 0 0 18px;
+    }
+    .sc-cert__list { margin: 0 0 28px; }
+    .sc-cert__list > div {
+      display: grid;
+      grid-template-columns: 130px minmax(0,1fr);
+      gap: 16px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--ms-line);
+    }
+    .sc-cert__list > div:first-child { padding-top: 0; }
+    .sc-cert__list dt {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ms-ink-soft);
+      padding-top: 1px;
+    }
+    .sc-cert__list dd {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--ms-ink);
+    }
+    .sc-uid {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+    }
+    .sc-uid code {
+      font-family: var(--ms-body);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--ms-purple-900);
+      font-variant-numeric: tabular-nums;
+    }
+    .sc-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--ms-radius-pill);
+      border: 1px solid var(--ms-line);
+      background: var(--ms-white);
+      color: var(--ms-purple);
+      font-size: 13px;
+      font-weight: 600;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .sc-copy:hover { border-color: var(--ms-purple); }
+    .sc-copy.is-copied { background: var(--ms-purple); border-color: var(--ms-purple); color: var(--ms-white); }
+    .sc-copy__status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+    .sc-cert__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .sc-cert__actions .ms-btn--ghost { background: var(--ms-white); }
+
+    .sc-verify {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px 40px;
+      margin-top: 24px;
+      padding: 30px 36px;
+      border-radius: var(--ms-radius-xl);
+      background:
+        radial-gradient(ellipse 60% 120% at 0% 50%, rgba(23,202,242,0.22), transparent 60%),
+        linear-gradient(120deg, var(--ms-purple-900) 0%, var(--ms-purple) 100%);
+      color: var(--ms-white);
+      scroll-margin-top: 110px;
+    }
+    .sc-verify h3 { font-size: 21px; color: var(--ms-white); margin: 0 0 12px; }
+    .sc-verify p {
+      margin: 0;
+      max-width: 640px;
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.84);
+    }
+    .sc-verify p strong { color: var(--ms-white); letter-spacing: 0.02em; white-space: nowrap; }
+    .sc-verify__btn { flex-shrink: 0; }
+
+    /* ---------- Certificate viewer ---------- */
+    .sc-viewer {
+      margin: auto;
+      inset: 0;
+      width: min(1180px, calc(100vw - 48px));
+      max-width: none;
+      height: calc(100vh - 48px);
+      height: calc(100dvh - 48px);
+      max-height: none;
+      padding: 0;
+      border: 0;
+      border-radius: var(--ms-radius-lg);
+      background: #EDEAF5;
+      color: var(--ms-ink);
+      box-shadow: var(--ms-shadow-xl);
+      overflow: hidden;
+    }
+    .sc-viewer:not([open]) { display: none; }
+    .sc-viewer[open] { display: flex; flex-direction: column; }
+    .sc-viewer::backdrop { background: rgba(23, 14, 63, 0.72); }
+    .sc-viewer__bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px 14px 24px;
+      background: var(--ms-white);
+      border-bottom: 1px solid var(--ms-line);
+    }
+    .sc-viewer__title { display: flex; flex-direction: column; min-width: 0; }
+    .sc-viewer__title strong { font-size: 16px; color: var(--ms-purple-900); }
+    .sc-viewer__title span { font-size: 13px; color: var(--ms-ink-soft); }
+    .sc-viewer__tools { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .sc-viewer__tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: var(--ms-radius-pill);
+      border: 1px solid var(--ms-line);
+      color: var(--ms-purple);
+      font-size: 14px;
+      font-weight: 600;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sc-viewer__tool:hover { border-color: var(--ms-purple); background: var(--ms-purple-50); }
+    .sc-viewer__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-left: 4px;
+      border-radius: 50%;
+      background: var(--ms-purple);
+      color: var(--ms-white);
+      transition: background 0.2s;
+    }
+    .sc-viewer__close:hover { background: var(--ms-purple-700); }
+    .sc-viewer__pages {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 28px;
+      display: grid;
+      gap: 28px;
+      align-content: start;
+    }
+    .sc-viewer__pages:focus { outline: none; }
+    .sc-viewer__pages:focus-visible { outline: 2px solid var(--ms-purple); outline-offset: -4px; }
+    .sc-viewer figure { margin: 0; }
+    .sc-viewer figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      background: var(--ms-white);
+      box-shadow: var(--ms-shadow-md);
+    }
+    .sc-viewer figcaption {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ms-ink-soft);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1024px) {
+      .sc-points { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .sc-point, .sc-point:nth-child(n+4) { grid-column: auto; }
+      .sc-point:last-child { grid-column: 1 / -1; }
+      .sc-advisor { grid-template-columns: 300px minmax(0,1fr); }
+      .sc-cert { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 860px) {
+      .sc-hero { padding: 64px 0 60px; }
+      .sc-hero__inner { grid-template-columns: 1fr; gap: 40px; }
+      .sc-seal { justify-self: start; }
+      .sc-advisor { grid-template-columns: 1fr; }
+      .sc-verify { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 640px) {
+      .sc-section { padding: 64px 0; }
+      .sc-head { margin-bottom: 32px; }
+      .sc-points { grid-template-columns: 1fr; gap: 14px; }
+      .sc-point:last-child { grid-column: auto; }
+      .sc-point { padding: 22px 22px 24px; }
+      .sc-advisor__id { padding: 30px 24px 28px; }
+      .sc-advisor__bio { padding: 28px 24px 30px; }
+      .sc-cert { padding: 18px; border-radius: var(--ms-radius-lg); }
+      .sc-cert__list > div { grid-template-columns: 1fr; gap: 3px; }
+      .sc-cert__actions .ms-btn { flex: 1 1 100%; }
+      .sc-verify { padding: 26px 22px; border-radius: var(--ms-radius-lg); }
+      .sc-verify__btn { width: 100%; }
+      .sc-viewer { width: 100vw; height: 100vh; height: 100dvh; border-radius: 0; }
+      .sc-viewer__bar { padding: 12px 12px 12px 16px; }
+      .sc-viewer__tool { padding: 9px 11px; }
+      .sc-viewer__tool span { display: none; }
+      .sc-viewer__pages { padding: 16px 12px; gap: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sc-point, .sc-cert__preview img { transition: none; }
+      .sc-point:hover { transform: none; }
+      .sc-cert__preview:hover img { transform: none; }
+    }
+
+    /* ---------- RTL ---------- */
+    [dir="rtl"] .sc-head,
+    [dir="rtl"] .sc-hero__copy,
+    [dir="rtl"] .sc-point,
+    [dir="rtl"] .sc-advisor,
+    [dir="rtl"] .sc-cert__info,
+    [dir="rtl"] .sc-verify__copy,
+    [dir="rtl"] .sc-viewer__title { text-align: right; }
+    [dir="rtl"] .sc-viewer__close { margin-left: 0; margin-right: 4px; }
+    [dir="rtl"] .sc-cert__actions .ms-btn svg,
+    [dir="rtl"] .sc-verify__btn svg { transform: none; }

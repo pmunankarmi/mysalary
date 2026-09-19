@@ -67,6 +67,23 @@ add_action( 'wp_enqueue_scripts', function () {
         true
     );
 
+    if ( is_page_template( 'page-templates/template-sharia-compliance.php' ) ) {
+        wp_enqueue_style(
+            'mysalary-sharia-compliance',
+            MYSALARY_URI . '/assets/css/sharia-compliance.css',
+            [ 'mysalary-main' ],
+            MYSALARY_VERSION
+        );
+
+        wp_enqueue_script(
+            'mysalary-sharia-compliance',
+            MYSALARY_URI . '/assets/js/sharia-compliance.js',
+            [],
+            MYSALARY_VERSION,
+            true
+        );
+    }
+
     $form_templates = [
         'page-templates/template-demo.php',
         'page-templates/template-contact.php',
