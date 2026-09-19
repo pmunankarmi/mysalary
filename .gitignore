@@ -1,0 +1,11 @@
+# Local working copies and generated archives.
+/cleaned-theme/
+/mysalary/
+/mysalary-blank/
+/*.zip
+
+# OS/editor files.
+.DS_Store
+*.swp
+*.swo
+
