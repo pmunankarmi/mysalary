@@ -14,8 +14,121 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$field = static function ( $name, $fallback = '' ) {
-	return mysalary_field( $name, false, $fallback );
+$current_language = function_exists( 'pll_current_language' ) ? (string) pll_current_language( 'slug' ) : '';
+$is_arabic        = 'ar' === $current_language || ( ! $current_language && is_rtl() );
+
+$english_defaults = [
+	'sharia_hero_eyebrow'               => 'Sharia governance',
+	'sharia_hero_heading'               => 'Sharia Compliance',
+	'sharia_hero_intro'                 => 'We are committed to complying with Sharia governance practices such as (but not limited to) the establishment of a Sharia Committee, independence of pronouncement, administration of Sharia audit and Sharia reporting.',
+	'sharia_hero_view_label'            => 'View Sharia Certificate',
+	'sharia_hero_verify_label'          => 'Verify the certificate',
+	'sharia_certification_aria_label'   => 'Sharia certification',
+	'sharia_certified_by_label'         => 'Certified by',
+	'sharia_certification_logo_alt'     => 'Shariyah Review Bureau',
+	'sharia_uid_label'                  => 'UID code',
+	'sharia_governance_heading'         => 'Sharia Governance',
+	'sharia_governance_intro'           => 'We have appointed Shariyah Review Bureau (SRB) to help us adhere to the best practices and guidelines on Sharia governance.',
+	'sharia_committee_heading'          => 'Sharia Committee',
+	'sharia_committee_intro'            => 'For the purpose of effective Sharia governance and supervision, a renowned and qualified Sharia scholar has been assigned. The Sharia scholars independently issue pronouncements, and these rulings are binding on us. The names of the Sharia Committee members are provided below:',
+	'sharia_certificate_heading'        => 'Sharia Certificate',
+	'sharia_certificate_thumbnail_alt'  => 'First page of the Opinion on Sharia Compliance issued by Shariyah Review Bureau for the MySalary Earned Wage Access Service',
+	'sharia_certificate_preview_label'  => 'View certificate',
+	'sharia_certificate_title'          => 'Opinion on Sharia Compliance',
+	'sharia_issued_by_label'             => 'Issued by',
+	'sharia_issued_by_value'             => 'Shariyah Review Bureau (SRB)',
+	'sharia_product_label'               => 'Product',
+	'sharia_product_value'               => 'MySalary Earned Wage Access Service',
+	'sharia_company_label'               => 'Company',
+	'sharia_company_value'               => 'Alajur Alraqmia Liltiqniat Company',
+	'sharia_date_label'                  => 'Date',
+	'sharia_date_value'                  => '26 June 2026',
+	'sharia_copy_label'                  => 'Copy',
+	'sharia_copied_label'                => 'Copied',
+	'sharia_copied_status'               => 'UID code copied',
+	'sharia_view_button_label'           => 'View certificate',
+	'sharia_download_button_label'       => 'Download PDF',
+	'sharia_verify_heading'              => 'Verify the certificate',
+	'sharia_verify_before_uid'           => 'The authenticity of this document and list of documents approved can be verified at shariyah.net using UID code',
+	'sharia_verify_after_uid'            => '.',
+	'sharia_verify_button_label'         => 'Verify on shariyah.net',
+	'sharia_viewer_title'                => 'Sharia Certificate',
+	'sharia_viewer_subtitle'             => 'Shariyah Review Bureau · 5 pages',
+	'sharia_viewer_download_label'       => 'Download',
+	'sharia_viewer_verify_label'         => 'Verify',
+	'sharia_viewer_close_label'          => 'Close certificate',
+	'sharia_viewer_pages_label'          => 'Certificate pages',
+	'sharia_viewer_caption_format'       => 'Page %1$d of %2$d',
+	'sharia_viewer_alt_format'           => 'Certificate page %1$d of %2$d',
+];
+
+$arabic_defaults = [
+	'sharia_hero_eyebrow'               => 'الحوكمة الشرعية',
+	'sharia_hero_heading'               => 'الامتثال لأحكام الشريعة',
+	'sharia_hero_intro'                 => 'نلتزم بتطبيق ممارسات الحوكمة الشرعية، بما يشمل - على سبيل المثال لا الحصر - تشكيل لجنة شرعية، واستقلالية إصدار القرارات الشرعية، وإجراء التدقيق الشرعي، وإعداد التقارير الشرعية.',
+	'sharia_hero_view_label'            => 'عرض الشهادة الشرعية',
+	'sharia_hero_verify_label'          => 'التحقق من الشهادة',
+	'sharia_certification_aria_label'   => 'اعتماد الامتثال الشرعي',
+	'sharia_certified_by_label'         => 'معتمد من',
+	'sharia_certification_logo_alt'     => 'دار المراجعة الشرعية',
+	'sharia_uid_label'                  => 'رمز التحقق',
+	'sharia_governance_heading'         => 'الحوكمة الشرعية',
+	'sharia_governance_intro'           => 'قمنا بتعيين دار المراجعة الشرعية (SRB) لمساعدتنا على الالتزام بأفضل الممارسات والإرشادات المتعلقة بالحوكمة الشرعية.',
+	'sharia_committee_heading'          => 'اللجنة الشرعية',
+	'sharia_committee_intro'            => 'لضمان فعالية الحوكمة والرقابة الشرعية، تم تعيين عالم شرعي مرموق ومؤهل. ويصدر عالم الشريعة أحكامه بصورة مستقلة، وتكون هذه الأحكام ملزمة لنا. ويرد أدناه اسم عضو اللجنة الشرعية:',
+	'sharia_certificate_heading'        => 'الشهادة الشرعية',
+	'sharia_certificate_thumbnail_alt'  => 'الصفحة الأولى من وثيقة الرأي حول التوافق الشرعي الصادرة عن دار المراجعة الشرعية لخدمة ماي سالاري للوصول إلى الأجر المكتسب',
+	'sharia_certificate_preview_label'  => 'عرض الشهادة',
+	'sharia_certificate_title'          => 'الرأي حول التوافق الشرعي',
+	'sharia_issued_by_label'             => 'صادرة عن',
+	'sharia_issued_by_value'             => 'دار المراجعة الشرعية (SRB)',
+	'sharia_product_label'               => 'المنتج',
+	'sharia_product_value'               => 'خدمة ماي سالاري للوصول إلى الأجر المكتسب',
+	'sharia_company_label'               => 'الشركة',
+	'sharia_company_value'               => 'شركة الأجور الرقمية للتقنيات',
+	'sharia_date_label'                  => 'التاريخ',
+	'sharia_date_value'                  => '26 يونيو 2026',
+	'sharia_copy_label'                  => 'نسخ',
+	'sharia_copied_label'                => 'تم النسخ',
+	'sharia_copied_status'               => 'تم نسخ رمز التحقق',
+	'sharia_view_button_label'           => 'عرض الشهادة',
+	'sharia_download_button_label'       => 'تنزيل ملف PDF',
+	'sharia_verify_heading'              => 'التحقق من الشهادة',
+	'sharia_verify_before_uid'           => 'يمكن التحقق من صحة هذه الوثيقة وقائمة المستندات المعتمدة عبر موقع shariyah.net باستخدام رمز التحقق',
+	'sharia_verify_after_uid'            => '.',
+	'sharia_verify_button_label'         => 'التحقق عبر shariyah.net',
+	'sharia_viewer_title'                => 'الشهادة الشرعية',
+	'sharia_viewer_subtitle'             => 'دار المراجعة الشرعية · 5 صفحات',
+	'sharia_viewer_download_label'       => 'تنزيل',
+	'sharia_viewer_verify_label'         => 'تحقق',
+	'sharia_viewer_close_label'          => 'إغلاق الشهادة',
+	'sharia_viewer_pages_label'          => 'صفحات الشهادة',
+	'sharia_viewer_caption_format'       => 'الصفحة %1$d من %2$d',
+	'sharia_viewer_alt_format'           => 'الصفحة %1$d من %2$d من الشهادة',
+];
+
+$field = static function ( $name, $fallback = '' ) use ( $is_arabic, $english_defaults, $arabic_defaults ) {
+	$english_fallback   = $english_defaults[ $name ] ?? $fallback;
+	$localized_fallback = $is_arabic && isset( $arabic_defaults[ $name ] )
+		? $arabic_defaults[ $name ]
+		: $english_fallback;
+
+	if ( ! function_exists( 'get_field' ) ) {
+		return $localized_fallback;
+	}
+
+	$value = get_field( $name, false );
+	if ( null === $value || '' === $value || false === $value ) {
+		return $localized_fallback;
+	}
+
+	// ACF returns its English default_value even when the translated page
+	// has never saved the field. Replace only that unchanged default.
+	if ( $is_arabic && isset( $arabic_defaults[ $name ] ) && $value === $english_fallback ) {
+		return $arabic_defaults[ $name ];
+	}
+
+	return $value;
 };
 
 $media_url = static function ( $value, $fallback = '' ) {
@@ -35,7 +148,7 @@ $media_url = static function ( $value, $fallback = '' ) {
 	return $fallback;
 };
 
-$default_governance_points = [
+$english_governance_points = [
 	[
 		'icon'  => 'shield-check',
 		'title' => 'Sharia governance support',
@@ -63,7 +176,35 @@ $default_governance_points = [
 	],
 ];
 
-$default_committee_members = [
+$arabic_governance_points = [
+	[
+		'icon'  => 'shield-check',
+		'title' => 'دعم الحوكمة الشرعية',
+		'text'  => 'تسهّل دار المراجعة الشرعية المناقشات ذات الصلة بالشريعة، وأبحاث المنتجات، وإعداد التقارير الشرعية في جميع أنحاء الشركة.',
+	],
+	[
+		'icon'  => 'users',
+		'title' => 'لجنة شرعية مستقلة',
+		'text'  => 'تساعد دار المراجعة الشرعية على تشكيل لجنة شرعية مؤهلة ومستقلة والمحافظة عليها.',
+	],
+	[
+		'icon'  => 'document',
+		'title' => 'المراجعات والتدقيق الشرعي',
+		'text'  => 'تنسّق دار المراجعة الشرعية عمليات المراجعة الشرعية وتشرف على التدقيق الشرعي للتحقق من الالتزام.',
+	],
+	[
+		'icon'  => 'tag',
+		'title' => 'امتثال المنتجات',
+		'text'  => 'تدعم دار المراجعة الشرعية تطوير المنتجات، وتضمن اعتماد المنتجات ذات الصلة والموافقة عليها من اللجنة الشرعية.',
+	],
+	[
+		'icon'  => 'refresh',
+		'title' => 'الالتزام الشرعي المستمر',
+		'text'  => 'تساعد دار المراجعة الشرعية على ضمان استمرار توافق المنتجات والخدمات ذات الصلة مع مبادئ الشريعة وقرارات اللجنة الشرعية.',
+	],
+];
+
+$english_committee_members = [
 	[
 		'name' => 'Sh. Dr. Abdullah Bin Khalid AlJohar',
 		'role' => 'Sharia Advisor',
@@ -71,8 +212,27 @@ $default_committee_members = [
 	],
 ];
 
-$governance_points = $field( 'sharia_governance_points', $default_governance_points );
-$committee_members = $field( 'sharia_committee_members', $default_committee_members );
+$arabic_committee_members = [
+	[
+		'name' => 'فضيلة الشيخ الدكتور عبدالله بن خالد الجوهر',
+		'role' => 'المستشار الشرعي',
+		'bio'  => "الشيخ الدكتور عبدالله بن خالد الجوهر أكاديمي سعودي ومستشار شرعي متخصص في الفقه المقارن والعقود والمعاملات المالية المعاصرة، ويتمتع بخبرة أكاديمية واستشارية تزيد على 13 عامًا. ويشغل حاليًا منصب أستاذ مساعد في الفقه بكلية الشريعة والدراسات الإسلامية بجامعة الملك فيصل، وسبق له التدريس في جامعة الإمام محمد بن سعود الإسلامية.\n\nيقدم الاستشارات الشرعية والقانونية للجهات الأكاديمية والمالية والبحثية، ويعمل محكمًا في المنازعات التجارية والمالية. حصل على درجة الدكتوراه في الفقه من جامعة الإمام محمد بن سعود الإسلامية، وتركزت أبحاثه على التبعية في المعاملات المالية، كما يحمل درجتي الماجستير والبكالوريوس في الشريعة والفقه المقارن. وتشمل اهتماماته البحثية الصكوك والتحوط وإدارة المخاطر وهياكل المرابحة والمضاربة والعقود المالية وفقه الزكاة والقواعد والمقاصد الشرعية والأسواق المالية المعاصرة. كما أنه معتمد من المعهد القانوني للمحكمين (CIArb) في المملكة المتحدة، وأتم برامج تدريب متقدمة في المصرفية الإسلامية والتأمين التعاوني وتطوير المنتجات المالية.\n\nويشارك بفاعلية في عضوية الهيئات الشرعية، ويقدم الإشراف والاستشارات الشرعية لمؤسسات تعمل في قطاعات التأمين والتمويل وصناديق الاستثمار والتقنية المالية.",
+	],
+];
+
+$default_governance_points = $is_arabic ? $arabic_governance_points : $english_governance_points;
+$default_committee_members = $is_arabic ? $arabic_committee_members : $english_committee_members;
+$governance_points         = $field( 'sharia_governance_points', $default_governance_points );
+$committee_members         = $field( 'sharia_committee_members', $default_committee_members );
+
+// Replace unchanged English repeater defaults on the Arabic page.
+if ( $is_arabic && $english_governance_points === $governance_points ) {
+	$governance_points = $arabic_governance_points;
+}
+
+if ( $is_arabic && $english_committee_members === $committee_members ) {
+	$committee_members = $arabic_committee_members;
+}
 
 if ( ! is_array( $governance_points ) || ! $governance_points ) {
 	$governance_points = $default_governance_points;

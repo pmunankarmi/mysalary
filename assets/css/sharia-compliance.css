@@ -100,6 +100,8 @@
       letter-spacing: 0.02em;
       color: var(--ms-purple-900);
       font-variant-numeric: tabular-nums;
+      direction: ltr;
+      unicode-bidi: isolate;
     }
 
     /* style.css gives every svg max-width:100%, which lets icons in tight pills shrink to nothing */
@@ -317,6 +319,8 @@
       letter-spacing: 0.02em;
       color: var(--ms-purple-900);
       font-variant-numeric: tabular-nums;
+      direction: ltr;
+      unicode-bidi: isolate;
     }
     .sc-copy {
       display: inline-flex;
@@ -505,4 +509,5 @@
     [dir="rtl"] .sc-viewer__title { text-align: right; }
     [dir="rtl"] .sc-viewer__close { margin-left: 0; margin-right: 4px; }
     [dir="rtl"] .sc-cert__actions .ms-btn svg,
-    [dir="rtl"] .sc-verify__btn svg { transform: none; }
+    [dir="rtl"] .sc-verify__btn svg,
+    [dir="rtl"] .sc-hero .ms-btn svg { transform: none; }

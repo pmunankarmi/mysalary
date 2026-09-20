@@ -186,6 +186,7 @@ The AJAX actions are `mysalary_demo_submit`, `mysalary_contact_submit`, and `mys
 
 - Cairo is loaded for both languages but only applied to body/headings when the current Polylang language is `ar`. Inter is used for English.
 - `is-rtl` body class is added when the active locale is RTL — the theme's CSS uses this for one specific override (flipping the `→` arrow icon in CTA buttons). Add more selectors as needed.
+- The Sharia Compliance template includes complete Arabic defaults for headings, cards, committee biography, certificate details, controls, and accessibility labels. On an Arabic page, these are used whenever the matching ACF field is empty or still contains its unchanged English default; any custom Arabic ACF value takes priority.
 - WordPress auto-loads `rtl.css` if it exists in the theme root. This theme handles RTL inside `main.css` via the `[dir="rtl"]` selector and `is-rtl` class — there's no separate `rtl.css`. If you find an alignment that needs fixing in Arabic, target it with `body.is-rtl .your-selector { ... }`.
 
 ## Troubleshooting

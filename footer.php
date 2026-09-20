@@ -33,7 +33,8 @@ $footer_page_url = static function ( $slug ) {
 	return $page ? get_permalink( $page ) : home_url( '/' . trim( $slug, '/' ) . '/' );
 };
 
-$certificate_setting  = '#' === trim( (string) $certificate_setting ) ? '' : $certificate_setting;
+$certificate_setting  = trim( (string) $certificate_setting );
+$certificate_setting  = wp_http_validate_url( $certificate_setting ) ? $certificate_setting : '';
 $certificate_url      = $certificate_setting ?: $footer_page_url( 'sharia-compliance' );
 $certificate_external = (bool) $certificate_setting;
 ?>
