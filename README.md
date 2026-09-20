@@ -57,6 +57,8 @@ The theme checks the latest release from `pmunankarmi/mysalary` every hour. Ever
 
 Automatic updates require working WP-Cron and outbound HTTPS access to `api.github.com` and `github.com`. Keep the repository public unless the updater is extended with a private-repository token.
 
+After each installed theme version changes, the theme automatically purges LiteSpeed Cache once. This prevents a successful background update from continuing to serve the previous page HTML.
+
 Optional: **ACF Options For Polylang** plugin — only needed if you want the *Site Settings* options page (under "Site Settings" in admin sidebar) to have separate values per language. The home page sections work fine without it because ACF fields on translated pages are already per-language.
 
 ## Install

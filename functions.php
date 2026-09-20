@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MYSALARY_VERSION', '1.4.1' );
+define( 'MYSALARY_VERSION', '1.4.2' );
 define( 'MYSALARY_DIR',     get_template_directory() );
 define( 'MYSALARY_URI',     get_template_directory_uri() );
 
@@ -36,6 +36,7 @@ require_once MYSALARY_DIR . '/inc/polylang-slug.php';
 require_once MYSALARY_DIR . '/inc/polylang.php';
 require_once MYSALARY_DIR . '/inc/form-handler.php';
 require_once MYSALARY_DIR . '/inc/github-updater.php';
+require_once MYSALARY_DIR . '/inc/cache.php';
 
 
 
