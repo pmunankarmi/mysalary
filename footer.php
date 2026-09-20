@@ -92,7 +92,7 @@ $certificate_external = (bool) $certificate_setting;
 						<li><a href="<?php echo esc_url( $footer_page_url( 'privacy-policy' ) ); ?>"><?php echo esc_html( mysalary_form_string( 'footer_privacy', 'Privacy Policy', 'سياسة الخصوصية' ) ); ?></a></li>
 						<li><a href="<?php echo esc_url( $footer_page_url( 'terms-of-service' ) ); ?>"><?php echo esc_html( mysalary_form_string( 'footer_terms', 'Terms of Service', 'شروط الاستخدام' ) ); ?></a></li>
 						<li><a href="<?php echo esc_url( $footer_page_url( 'security' ) ); ?>"><?php echo esc_html( mysalary_form_string( 'footer_security', 'Security', 'الأمان' ) ); ?></a></li>
-						<li><a href="<?php echo esc_url( $certificate_url ); ?>"<?php echo $certificate_external ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( mysalary_form_string( 'footer_shariah', 'Shariah-compliant', 'متوافق مع الشريعة' ) ); ?></a></li>
+						<li><a href="<?php echo esc_url( $certificate_url ); ?>"<?php echo $certificate_external ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( mysalary_form_string( 'footer_shariah', 'Shariah-compliant', 'متوافق مع أحكام الشريعة الإسلامية' ) ); ?></a></li>
 					</ul>
 				<?php endif; ?>
 			</div>

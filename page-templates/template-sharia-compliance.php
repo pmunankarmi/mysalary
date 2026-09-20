@@ -63,19 +63,19 @@ $english_defaults = [
 ];
 
 $arabic_defaults = [
-	'sharia_hero_eyebrow'               => 'الحوكمة الشرعية',
-	'sharia_hero_heading'               => 'الامتثال لأحكام الشريعة',
-	'sharia_hero_intro'                 => 'نلتزم بتطبيق ممارسات الحوكمة الشرعية، بما يشمل - على سبيل المثال لا الحصر - تشكيل لجنة شرعية، واستقلالية إصدار القرارات الشرعية، وإجراء التدقيق الشرعي، وإعداد التقارير الشرعية.',
+	'sharia_hero_eyebrow'               => 'اللجنة الشرعية',
+	'sharia_hero_heading'               => 'الالتزام بأحكام الشريعة الإسلامية',
+	'sharia_hero_intro'                 => 'نلتزم بضمان توافق منتجاتنا وعملياتنا ومعاملاتنا مع أحكام الشريعة الإسلامية، من خلال لجنة شرعية مستقلة ومراجعة العقود والمنتجات وإجراء التدقيق وإعداد التقارير الشرعية.',
 	'sharia_hero_view_label'            => 'عرض الشهادة الشرعية',
 	'sharia_hero_verify_label'          => 'التحقق من الشهادة',
-	'sharia_certification_aria_label'   => 'اعتماد الامتثال الشرعي',
+	'sharia_certification_aria_label'   => 'شهادة الالتزام بأحكام الشريعة الإسلامية',
 	'sharia_certified_by_label'         => 'معتمد من',
 	'sharia_certification_logo_alt'     => 'دار المراجعة الشرعية',
 	'sharia_uid_label'                  => 'رمز التحقق',
-	'sharia_governance_heading'         => 'الحوكمة الشرعية',
-	'sharia_governance_intro'           => 'قمنا بتعيين دار المراجعة الشرعية (SRB) لمساعدتنا على الالتزام بأفضل الممارسات والإرشادات المتعلقة بالحوكمة الشرعية.',
-	'sharia_committee_heading'          => 'اللجنة الشرعية',
-	'sharia_committee_intro'            => 'لضمان فعالية الحوكمة والرقابة الشرعية، تم تعيين عالم شرعي مرموق ومؤهل. ويصدر عالم الشريعة أحكامه بصورة مستقلة، وتكون هذه الأحكام ملزمة لنا. ويرد أدناه اسم عضو اللجنة الشرعية:',
+	'sharia_governance_heading'         => 'ضمان الامتثال',
+	'sharia_governance_intro'           => 'عيّنا دار المراجعة الشرعية (SRB) لدعم الحوكمة الشرعية وضمان الالتزام بأحكام الشريعة الإسلامية والضوابط الشرعية ذات الصلة.',
+	'sharia_committee_heading'          => 'اللجنة الشرعية المستقلة',
+	'sharia_committee_intro'            => 'لضمان فعالية الحوكمة ومراقبة الالتزام، عيّنا مستشارًا شرعيًا متخصصًا في فقه المعاملات المالية الإسلامية ضمن لجنة شرعية مستقلة. ويصدر المستشار قراراته وتوجيهاته بصورة مستقلة، وتكون ملزمة لنا. ويرد أدناه اسم عضو اللجنة الشرعية:',
 	'sharia_certificate_heading'        => 'الشهادة الشرعية',
 	'sharia_certificate_thumbnail_alt'  => 'الصفحة الأولى من وثيقة الرأي حول التوافق الشرعي الصادرة عن دار المراجعة الشرعية لخدمة ماي سالاري للوصول إلى الأجر المكتسب',
 	'sharia_certificate_preview_label'  => 'عرض الشهادة',
@@ -107,7 +107,21 @@ $arabic_defaults = [
 	'sharia_viewer_alt_format'           => 'الصفحة %1$d من %2$d من الشهادة',
 ];
 
-$field = static function ( $name, $fallback = '' ) use ( $is_arabic, $english_defaults, $arabic_defaults ) {
+// Upgrade only the previous bundled Arabic copy. Editorial changes saved in
+// ACF remain untouched, while untouched translated pages receive the refined
+// terminology automatically after a theme update.
+$previous_arabic_defaults = [
+	'sharia_hero_eyebrow'             => 'الحوكمة الشرعية',
+	'sharia_hero_heading'             => 'الامتثال لأحكام الشريعة',
+	'sharia_hero_intro'               => 'نلتزم بتطبيق ممارسات الحوكمة الشرعية، بما يشمل - على سبيل المثال لا الحصر - تشكيل لجنة شرعية، واستقلالية إصدار القرارات الشرعية، وإجراء التدقيق الشرعي، وإعداد التقارير الشرعية.',
+	'sharia_certification_aria_label' => 'اعتماد الامتثال الشرعي',
+	'sharia_governance_heading'       => 'الحوكمة الشرعية',
+	'sharia_governance_intro'         => 'قمنا بتعيين دار المراجعة الشرعية (SRB) لمساعدتنا على الالتزام بأفضل الممارسات والإرشادات المتعلقة بالحوكمة الشرعية.',
+	'sharia_committee_heading'        => 'اللجنة الشرعية',
+	'sharia_committee_intro'          => 'لضمان فعالية الحوكمة والرقابة الشرعية، تم تعيين عالم شرعي مرموق ومؤهل. ويصدر عالم الشريعة أحكامه بصورة مستقلة، وتكون هذه الأحكام ملزمة لنا. ويرد أدناه اسم عضو اللجنة الشرعية:',
+];
+
+$field = static function ( $name, $fallback = '' ) use ( $is_arabic, $english_defaults, $arabic_defaults, $previous_arabic_defaults ) {
 	$english_fallback   = $english_defaults[ $name ] ?? $fallback;
 	$localized_fallback = $is_arabic && isset( $arabic_defaults[ $name ] )
 		? $arabic_defaults[ $name ]
@@ -125,6 +139,10 @@ $field = static function ( $name, $fallback = '' ) use ( $is_arabic, $english_de
 	// ACF returns its English default_value even when the translated page
 	// has never saved the field. Replace only that unchanged default.
 	if ( $is_arabic && isset( $arabic_defaults[ $name ] ) && $value === $english_fallback ) {
+		return $arabic_defaults[ $name ];
+	}
+
+	if ( $is_arabic && isset( $previous_arabic_defaults[ $name ] ) && $value === $previous_arabic_defaults[ $name ] ) {
 		return $arabic_defaults[ $name ];
 	}
 
@@ -179,6 +197,34 @@ $english_governance_points = [
 $arabic_governance_points = [
 	[
 		'icon'  => 'shield-check',
+		'title' => 'تقديم المشورة الشرعية',
+		'text'  => 'تقدم دار المراجعة الشرعية المشورة في المسائل الشرعية، وتدعم الأبحاث وإعداد التقارير ذات الصلة.',
+	],
+	[
+		'icon'  => 'users',
+		'title' => 'اللجنة الشرعية المستقلة',
+		'text'  => 'تدعم دار المراجعة الشرعية لجنة مستقلة من المتخصصين في فقه المعاملات المالية الإسلامية.',
+	],
+	[
+		'icon'  => 'document',
+		'title' => 'المراجعة والتدقيق الشرعي',
+		'text'  => 'تنسّق دار المراجعة الشرعية أعمال المراجعة والتدقيق الشرعي للتحقق من الالتزام بأحكام الشريعة الإسلامية.',
+	],
+	[
+		'icon'  => 'tag',
+		'title' => 'تطوير المنتجات',
+		'text'  => 'تدعم دار المراجعة الشرعية تطوير المنتجات والعقود والاتفاقيات، وتضمن مراجعتها واعتمادها وفق الضوابط الشرعية قبل إطلاقها.',
+	],
+	[
+		'icon'  => 'refresh',
+		'title' => 'مراقبة الالتزام',
+		'text'  => 'تراقب دار المراجعة الشرعية استمرار توافق المنتجات والخدمات مع أحكام الشريعة الإسلامية وقرارات اللجنة الشرعية.',
+	],
+];
+
+$previous_arabic_governance_points = [
+	[
+		'icon'  => 'shield-check',
 		'title' => 'دعم الحوكمة الشرعية',
 		'text'  => 'تسهّل دار المراجعة الشرعية المناقشات ذات الصلة بالشريعة، وأبحاث المنتجات، وإعداد التقارير الشرعية في جميع أنحاء الشركة.',
 	],
@@ -227,6 +273,10 @@ $committee_members         = $field( 'sharia_committee_members', $default_commit
 
 // Replace unchanged English repeater defaults on the Arabic page.
 if ( $is_arabic && $english_governance_points === $governance_points ) {
+	$governance_points = $arabic_governance_points;
+}
+
+if ( $is_arabic && $previous_arabic_governance_points === $governance_points ) {
 	$governance_points = $arabic_governance_points;
 }
 

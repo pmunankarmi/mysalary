@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MYSALARY_VERSION', '1.4.2' );
+define( 'MYSALARY_VERSION', '1.4.3' );
 define( 'MYSALARY_DIR',     get_template_directory() );
 define( 'MYSALARY_URI',     get_template_directory_uri() );
 
